@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>jQuery隐藏收缩在线客服 - 站长素材</title>
+<link href="css/kefustyle.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="js/kefu.js"></script>
+</head>
+
+<body>
+<!--在线客服Begin-->
+<div id="floatTools" class="rides-cs">
+	<div class="floatL">
+		<a style="display: block" id="aFloatTools_Show" class="btnOpen" title="查看在线客服" onclick="javascript:$('#divFloatToolsView').animate({width: 'show', opacity: 'show'}, 'normal',function(){ $('#divFloatToolsView').show();kf_setCookie('RightFloatShown', 0, '', '/', 'www.shopnc.net'); });$('#aFloatTools_Show').attr('style','display:none');$('#aFloatTools_Hide').attr('style','display:block');" href="javascript:void(0);">
+		展开</a>
+		<a style="display: none" id="aFloatTools_Hide" class="btnCtn" title="关闭在线客服" onclick="javascript:$('#divFloatToolsView').animate({width: 'hide', opacity: 'hide'}, 'normal',function(){ $('#divFloatToolsView').hide();kf_setCookie('RightFloatShown', 1, '', '/', 'www.shopnc.net'); });$('#aFloatTools_Show').attr('style','display:block');$('#aFloatTools_Hide').attr('style','display:none');" href="javascript:void(0);">
+		收缩</a> </div>
+	<div id="divFloatToolsView" class="floatR" style="display: none">
+		<div class="cn">
+			<h3 class="titZx">产品销售</h3>
+			<ul>
+				<li><span>客服1</span>
+				<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=123456&site=qq&menu=yes">
+				<img border="0" src="http://wpa.qq.com/pa?p=2:123456:51" alt="ShopNC客服1" title="ShopNC客服1" /></a>
+				</li>
+				<li><span>客服2</span>
+				<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=123456&site=qq&menu=yes">
+				<img border="0" src="http://wpa.qq.com/pa?p=2:123456:51" alt="ShopNC客服2" title="ShopNC客服2" /></a></li>
+			</ul>
+			<h3>大宗订制</h3>
+			<ul>
+				<li><span>订 制</span>
+				<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=123456&site=qq&menu=yes">
+				<img border="0" src="http://wpa.qq.com/pa?p=2:123456:51" alt="大宗订制服务" title="大宗订制服务" /></a></li>
+			</ul>
+			<h3>售后服务</h3>
+			<ul>
+				<li><span>售 后</span>
+				<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=123456&site=qq&menu=yes">
+				<img border="0" src="http://wpa.qq.com/pa?p=2:123456:51" alt="售后服务客服" title="售后服务客服" /></a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<!--在线客服End-->
+<div style="text-align:center;clear:both">
+<p>适用浏览器：IE8、360、FireFox、Chrome、Safari、Opera、傲游、搜狗、世界之窗. </p>
+<p>来源：<a href="http://sc.chinaz.com/" target="_blank">站长素材</a></p>
+</div>
+</body>
+
+</html>

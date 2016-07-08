@@ -1,0 +1,891 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Bootstrap 3 的多级下拉菜单示例</title>
+    <script type="text/javascript" src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+    <link rel="stylesheet" href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css"/>
+    <!-- <link rel="stylesheet" href="../bootstrap-modal-master/bootstrap/css/bootstrap.min.css"/> -->
+    <script type="text/javascript" src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        .dropdown{
+            background-color: #fff;
+            height: 33px;
+            margin-top: 10px;
+            color: #222;
+        }
+        .dropdown-submenu {
+            position: relative;
+        }
+        .dropdown-submenu > .dropdown-menu {
+            top: 0;
+            left: 100%;
+            margin-top: -6px;
+            margin-left: -1px;
+            -webkit-border-radius: 0 6px 6px 6px;
+            -moz-border-radius: 0 6px 6px;
+            border-radius: 0 6px 6px 6px;
+        }
+        .dropdown-submenu:hover > .dropdown-menu {
+            display: block;
+        }
+        .dropdown-submenu > a:after {
+            display: block;
+            content: " ";
+            float: right;
+            width: 0;
+            height: 0;
+            border-color: transparent;
+            border-style: solid;
+            border-width: 5px 0 5px 5px;
+            border-left-color: #ccc;
+            margin-top: 5px;
+            margin-right: -10px;
+        }
+        .dropdown-submenu:hover > a:after {
+            border-left-color: #fff;
+        }
+        .dropdown-submenu.pull-left {
+            float: none;
+        }
+        .dropdown-submenu.pull-left > .dropdown-menu {
+            left: -100%;
+            margin-left: 10px;
+            -webkit-border-radius: 6px 0 6px 6px;
+            -moz-border-radius: 6px 0 6px 6px;
+            border-radius: 6px 0 6px 6px;
+        }
+    </style>
+    <script>
+   
+    function getValue(){
+        console.log($("#dLabel").attr("li_id"));
+        console.log(1);
+    }
+
+    /*li_id，li_name机房、精密柜、PDU*/
+    var menuJsonArray = [{
+    "id": "40288c934eee277d014eee2bef370006",
+    "name": "核心网络A",
+    "pdus": [{
+        "id": "40288c934eee277d014eee2bef370006",
+        "name": "核心网络A"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59fa00059",
+        "name": "核心网络B"
+    },
+    {
+        "id": "8a70819e533b1f2c01533b226be40004",
+        "name": "机房资源"
+    },
+    {
+        "id": "40288c934eee277d014eee2bef1d0005",
+        "name": "D-PDU-A-33"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59fec005b",
+        "name": "D-PDU-A-34"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59f760058",
+        "name": "D-PDU-B-33"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59f210057",
+        "name": "D-PDU-B-34"
+    },
+    {
+        "id": "40288c934eee277d014eee2bef010004",
+        "name": "D-JMKT-A-31"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b5a031005d",
+        "name": "D-JMKT-A-32"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b5a051005e",
+        "name": "D-JMKT-A-33"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59efc0056",
+        "name": "D-JMKT-B-31"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59ed10055",
+        "name": "D-JMKT-B-32"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b5a010005c",
+        "name": "D-JMKT-B-33"
+    }]
+},
+{
+    "id": "8a70819e4ef13f64014ef1b59fa00059",
+    "name": "核心网络B",
+    "pdus": [{
+        "id": "40288c934eee277d014eee2bef370006",
+        "name": "核心网络A"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59fa00059",
+        "name": "核心网络B"
+    },
+    {
+        "id": "8a70819e533b1f2c01533b226be40004",
+        "name": "机房资源"
+    },
+    {
+        "id": "40288c934eee277d014eee2bef1d0005",
+        "name": "D-PDU-A-33"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59fec005b",
+        "name": "D-PDU-A-34"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59f760058",
+        "name": "D-PDU-B-33"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59f210057",
+        "name": "D-PDU-B-34"
+    },
+    {
+        "id": "40288c934eee277d014eee2bef010004",
+        "name": "D-JMKT-A-31"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b5a031005d",
+        "name": "D-JMKT-A-32"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b5a051005e",
+        "name": "D-JMKT-A-33"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59efc0056",
+        "name": "D-JMKT-B-31"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59ed10055",
+        "name": "D-JMKT-B-32"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b5a010005c",
+        "name": "D-JMKT-B-33"
+    }]
+},
+{
+    "id": "8a70819e533b1f2c01533b226be40004",
+    "name": "机房资源",
+    "pdus": [{
+        "id": "40288c934eee277d014eee2bef370006",
+        "name": "核心网络A"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59fa00059",
+        "name": "核心网络B"
+    },
+    {
+        "id": "8a70819e533b1f2c01533b226be40004",
+        "name": "机房资源"
+    },
+    {
+        "id": "40288c934eee277d014eee2bef1d0005",
+        "name": "D-PDU-A-33"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59fec005b",
+        "name": "D-PDU-A-34"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59f760058",
+        "name": "D-PDU-B-33"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59f210057",
+        "name": "D-PDU-B-34"
+    },
+    {
+        "id": "40288c934eee277d014eee2bef010004",
+        "name": "D-JMKT-A-31"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b5a031005d",
+        "name": "D-JMKT-A-32"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b5a051005e",
+        "name": "D-JMKT-A-33"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59efc0056",
+        "name": "D-JMKT-B-31"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59ed10055",
+        "name": "D-JMKT-B-32"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b5a010005c",
+        "name": "D-JMKT-B-33"
+    }]
+},
+{
+    "id": "40288c934eee277d014eee2bef1d0005",
+    "name": "D-PDU-A-33",
+    "pdus": [{
+        "id": "40288c934eee277d014eee2bef370006",
+        "name": "核心网络A"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59fa00059",
+        "name": "核心网络B"
+    },
+    {
+        "id": "8a70819e533b1f2c01533b226be40004",
+        "name": "机房资源"
+    },
+    {
+        "id": "40288c934eee277d014eee2bef1d0005",
+        "name": "D-PDU-A-33"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59fec005b",
+        "name": "D-PDU-A-34"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59f760058",
+        "name": "D-PDU-B-33"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59f210057",
+        "name": "D-PDU-B-34"
+    },
+    {
+        "id": "40288c934eee277d014eee2bef010004",
+        "name": "D-JMKT-A-31"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b5a031005d",
+        "name": "D-JMKT-A-32"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b5a051005e",
+        "name": "D-JMKT-A-33"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59efc0056",
+        "name": "D-JMKT-B-31"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59ed10055",
+        "name": "D-JMKT-B-32"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b5a010005c",
+        "name": "D-JMKT-B-33"
+    }]
+},
+{
+    "id": "8a70819e4ef13f64014ef1b59fec005b",
+    "name": "D-PDU-A-34",
+    "pdus": [{
+        "id": "40288c934eee277d014eee2bef370006",
+        "name": "核心网络A"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59fa00059",
+        "name": "核心网络B"
+    },
+    {
+        "id": "8a70819e533b1f2c01533b226be40004",
+        "name": "机房资源"
+    },
+    {
+        "id": "40288c934eee277d014eee2bef1d0005",
+        "name": "D-PDU-A-33"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59fec005b",
+        "name": "D-PDU-A-34"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59f760058",
+        "name": "D-PDU-B-33"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59f210057",
+        "name": "D-PDU-B-34"
+    },
+    {
+        "id": "40288c934eee277d014eee2bef010004",
+        "name": "D-JMKT-A-31"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b5a031005d",
+        "name": "D-JMKT-A-32"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b5a051005e",
+        "name": "D-JMKT-A-33"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59efc0056",
+        "name": "D-JMKT-B-31"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59ed10055",
+        "name": "D-JMKT-B-32"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b5a010005c",
+        "name": "D-JMKT-B-33"
+    }]
+},
+{
+    "id": "8a70819e4ef13f64014ef1b59f760058",
+    "name": "D-PDU-B-33",
+    "pdus": [{
+        "id": "40288c934eee277d014eee2bef370006",
+        "name": "核心网络A"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59fa00059",
+        "name": "核心网络B"
+    },
+    {
+        "id": "8a70819e533b1f2c01533b226be40004",
+        "name": "机房资源"
+    },
+    {
+        "id": "40288c934eee277d014eee2bef1d0005",
+        "name": "D-PDU-A-33"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59fec005b",
+        "name": "D-PDU-A-34"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59f760058",
+        "name": "D-PDU-B-33"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59f210057",
+        "name": "D-PDU-B-34"
+    },
+    {
+        "id": "40288c934eee277d014eee2bef010004",
+        "name": "D-JMKT-A-31"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b5a031005d",
+        "name": "D-JMKT-A-32"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b5a051005e",
+        "name": "D-JMKT-A-33"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59efc0056",
+        "name": "D-JMKT-B-31"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59ed10055",
+        "name": "D-JMKT-B-32"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b5a010005c",
+        "name": "D-JMKT-B-33"
+    }]
+},
+{
+    "id": "8a70819e4ef13f64014ef1b59f210057",
+    "name": "D-PDU-B-34",
+    "pdus": [{
+        "id": "40288c934eee277d014eee2bef370006",
+        "name": "核心网络A"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59fa00059",
+        "name": "核心网络B"
+    },
+    {
+        "id": "8a70819e533b1f2c01533b226be40004",
+        "name": "机房资源"
+    },
+    {
+        "id": "40288c934eee277d014eee2bef1d0005",
+        "name": "D-PDU-A-33"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59fec005b",
+        "name": "D-PDU-A-34"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59f760058",
+        "name": "D-PDU-B-33"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59f210057",
+        "name": "D-PDU-B-34"
+    },
+    {
+        "id": "40288c934eee277d014eee2bef010004",
+        "name": "D-JMKT-A-31"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b5a031005d",
+        "name": "D-JMKT-A-32"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b5a051005e",
+        "name": "D-JMKT-A-33"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59efc0056",
+        "name": "D-JMKT-B-31"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59ed10055",
+        "name": "D-JMKT-B-32"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b5a010005c",
+        "name": "D-JMKT-B-33"
+    }]
+},
+{
+    "id": "40288c934eee277d014eee2bef010004",
+    "name": "D-JMKT-A-31",
+    "pdus": [{
+        "id": "40288c934eee277d014eee2bef370006",
+        "name": "核心网络A"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59fa00059",
+        "name": "核心网络B"
+    },
+    {
+        "id": "8a70819e533b1f2c01533b226be40004",
+        "name": "机房资源"
+    },
+    {
+        "id": "40288c934eee277d014eee2bef1d0005",
+        "name": "D-PDU-A-33"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59fec005b",
+        "name": "D-PDU-A-34"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59f760058",
+        "name": "D-PDU-B-33"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59f210057",
+        "name": "D-PDU-B-34"
+    },
+    {
+        "id": "40288c934eee277d014eee2bef010004",
+        "name": "D-JMKT-A-31"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b5a031005d",
+        "name": "D-JMKT-A-32"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b5a051005e",
+        "name": "D-JMKT-A-33"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59efc0056",
+        "name": "D-JMKT-B-31"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59ed10055",
+        "name": "D-JMKT-B-32"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b5a010005c",
+        "name": "D-JMKT-B-33"
+    }]
+},
+{
+    "id": "8a70819e4ef13f64014ef1b5a031005d",
+    "name": "D-JMKT-A-32",
+    "pdus": [{
+        "id": "40288c934eee277d014eee2bef370006",
+        "name": "核心网络A"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59fa00059",
+        "name": "核心网络B"
+    },
+    {
+        "id": "8a70819e533b1f2c01533b226be40004",
+        "name": "机房资源"
+    },
+    {
+        "id": "40288c934eee277d014eee2bef1d0005",
+        "name": "D-PDU-A-33"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59fec005b",
+        "name": "D-PDU-A-34"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59f760058",
+        "name": "D-PDU-B-33"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59f210057",
+        "name": "D-PDU-B-34"
+    },
+    {
+        "id": "40288c934eee277d014eee2bef010004",
+        "name": "D-JMKT-A-31"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b5a031005d",
+        "name": "D-JMKT-A-32"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b5a051005e",
+        "name": "D-JMKT-A-33"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59efc0056",
+        "name": "D-JMKT-B-31"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59ed10055",
+        "name": "D-JMKT-B-32"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b5a010005c",
+        "name": "D-JMKT-B-33"
+    }]
+},
+{
+    "id": "8a70819e4ef13f64014ef1b5a051005e",
+    "name": "D-JMKT-A-33",
+    "pdus": [{
+        "id": "40288c934eee277d014eee2bef370006",
+        "name": "核心网络A"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59fa00059",
+        "name": "核心网络B"
+    },
+    {
+        "id": "8a70819e533b1f2c01533b226be40004",
+        "name": "机房资源"
+    },
+    {
+        "id": "40288c934eee277d014eee2bef1d0005",
+        "name": "D-PDU-A-33"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59fec005b",
+        "name": "D-PDU-A-34"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59f760058",
+        "name": "D-PDU-B-33"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59f210057",
+        "name": "D-PDU-B-34"
+    },
+    {
+        "id": "40288c934eee277d014eee2bef010004",
+        "name": "D-JMKT-A-31"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b5a031005d",
+        "name": "D-JMKT-A-32"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b5a051005e",
+        "name": "D-JMKT-A-33"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59efc0056",
+        "name": "D-JMKT-B-31"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59ed10055",
+        "name": "D-JMKT-B-32"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b5a010005c",
+        "name": "D-JMKT-B-33"
+    }]
+},
+{
+    "id": "8a70819e4ef13f64014ef1b59efc0056",
+    "name": "D-JMKT-B-31",
+    "pdus": [{
+        "id": "40288c934eee277d014eee2bef370006",
+        "name": "核心网络A"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59fa00059",
+        "name": "核心网络B"
+    },
+    {
+        "id": "8a70819e533b1f2c01533b226be40004",
+        "name": "机房资源"
+    },
+    {
+        "id": "40288c934eee277d014eee2bef1d0005",
+        "name": "D-PDU-A-33"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59fec005b",
+        "name": "D-PDU-A-34"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59f760058",
+        "name": "D-PDU-B-33"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59f210057",
+        "name": "D-PDU-B-34"
+    },
+    {
+        "id": "40288c934eee277d014eee2bef010004",
+        "name": "D-JMKT-A-31"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b5a031005d",
+        "name": "D-JMKT-A-32"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b5a051005e",
+        "name": "D-JMKT-A-33"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59efc0056",
+        "name": "D-JMKT-B-31"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59ed10055",
+        "name": "D-JMKT-B-32"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b5a010005c",
+        "name": "D-JMKT-B-33"
+    }]
+},
+{
+    "id": "8a70819e4ef13f64014ef1b59ed10055",
+    "name": "D-JMKT-B-32",
+    "pdus": [{
+        "id": "40288c934eee277d014eee2bef370006",
+        "name": "核心网络A"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59fa00059",
+        "name": "核心网络B"
+    },
+    {
+        "id": "8a70819e533b1f2c01533b226be40004",
+        "name": "机房资源"
+    },
+    {
+        "id": "40288c934eee277d014eee2bef1d0005",
+        "name": "D-PDU-A-33"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59fec005b",
+        "name": "D-PDU-A-34"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59f760058",
+        "name": "D-PDU-B-33"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59f210057",
+        "name": "D-PDU-B-34"
+    },
+    {
+        "id": "40288c934eee277d014eee2bef010004",
+        "name": "D-JMKT-A-31"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b5a031005d",
+        "name": "D-JMKT-A-32"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b5a051005e",
+        "name": "D-JMKT-A-33"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59efc0056",
+        "name": "D-JMKT-B-31"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59ed10055",
+        "name": "D-JMKT-B-32"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b5a010005c",
+        "name": "D-JMKT-B-33"
+    }]
+},
+{
+    "id": "8a70819e4ef13f64014ef1b5a010005c",
+    "name": "D-JMKT-B-33",
+    "pdus": [{
+        "id": "40288c934eee277d014eee2bef370006",
+        "name": "核心网络A"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59fa00059",
+        "name": "核心网络B"
+    },
+    {
+        "id": "8a70819e533b1f2c01533b226be40004",
+        "name": "机房资源"
+    },
+    {
+        "id": "40288c934eee277d014eee2bef1d0005",
+        "name": "D-PDU-A-33"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59fec005b",
+        "name": "D-PDU-A-34"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59f760058",
+        "name": "D-PDU-B-33"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59f210057",
+        "name": "D-PDU-B-34"
+    },
+    {
+        "id": "40288c934eee277d014eee2bef010004",
+        "name": "D-JMKT-A-31"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b5a031005d",
+        "name": "D-JMKT-A-32"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b5a051005e",
+        "name": "D-JMKT-A-33"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59efc0056",
+        "name": "D-JMKT-B-31"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b59ed10055",
+        "name": "D-JMKT-B-32"
+    },
+    {
+        "id": "8a70819e4ef13f64014ef1b5a010005c",
+        "name": "D-JMKT-B-33"
+    }]
+}];
+    var json3 = [{"id":"8a3024f84cde9133014cdfb10d310049","name":"交易客户端"},{"id":"8a3024f84cde9133014cdfb10d31004a","name":"行情客户端"},{"id":"8a3024f74ce9aec8014cea312a4c0024","name":"主席位"},{"id":"8a3024f74ce9aec8014cea312a490023","name":"小席位"}];
+   var json4 = [{"id":"8a3024f84cde9133014cdfb10d310049","name":"交易客户端"},{"id":"8a3024f84cde9133014cdfb10d31004a","name":"行情客户端"},{"id":"8a3024f74ce9aec8014cea312a4c0024","name":"主席位"},{"id":"8a3024f74ce9aec8014cea312a490023","name":"小席位"}][{"id":"40288c934eee277d014eee2bef370006","name":"核心网络A","pdus":[]},{"id":"8a70819e4ef13f64014ef1b59fa00059","name":"核心网络B","pdus":[]},{"id":"8a70819e533b1f2c01533b226be40004","name":"机房资源","pdus":[]},{"id":"40288c934eee277d014eee2bef1d0005","name":"D-PDU-A-33","pdus":[]},{"id":"8a70819e4ef13f64014ef1b59fec005b","name":"D-PDU-A-34","pdus":[]},{"id":"8a70819e4ef13f64014ef1b59f760058","name":"D-PDU-B-33","pdus":[]},{"id":"8a70819e4ef13f64014ef1b59f210057","name":"D-PDU-B-34","pdus":[]},{"id":"40288c934eee277d014eee2bef010004","name":"D-JMKT-A-31","pdus":[{"id":"8a3025ea556d68cc01556d69642b0002","name":"是的"},{"id":"8a3025ea556d68cc01556d71eb7f0004","name":"得到"},{"id":"8a3025ea5575a80001557600f4a0000b","name":"1"},{"id":"8a30245755a596d30155a596f6c70001","name":"222"},{"id":"8a3025ea556d68cc01556d6ec7fe0003","name":"是的"},{"id":"8a3025ea5570780601557079e93b0001","name":"吾问无为谓呜呜呜"},{"id":"8a3025ea557078060155707a0db20002","name":"22"},{"id":"8a3025ea5570b13c015570b13cd30000","name":"11"},{"id":"8a3025ea556d68cc01556d68d8480001","name":"试试"},{"id":"8a3025ea557078060155707a24500003","name":"333"},{"id":"8a3025ea557078060155707a481b0004","name":"33"}]},{"id":"8a70819e4ef13f64014ef1b5a031005d","name":"D-JMKT-A-32","pdus":[]},{"id":"8a70819e4ef13f64014ef1b5a051005e","name":"D-JMKT-A-33","pdus":[]},{"id":"8a70819e4ef13f64014ef1b59efc0056","name":"D-JMKT-B-31","pdus":[]},{"id":"8a70819e4ef13f64014ef1b59ed10055","name":"D-JMKT-B-32","pdus":[]},{"id":"8a70819e4ef13f64014ef1b5a010005c","name":"D-JMKT-B-33","pdus":[]}];
+    menuhtml = "";
+    function spliceMenu(menuJson){
+        // var contact = JSON.parse(menuJsonArray);
+        for(item in menuJson){
+            
+            var itemLength = getJsonLength(menuJson[item]);
+            // console.log(itemLength);
+            if(itemLength>2){
+                menuhtml += '<li class="dropdown-submenu">'+
+                    '<a li_id="'+menuJson[item].id+'" tabindex="-1" href=\"javascript:clickMenu(\''+menuJson[item].id+'\',\''+menuJson[item].name+'\')\";>'+menuJson[item].name+'</a><ul class="dropdown-menu">';
+                spliceMenu(menuJson[item].pdus);
+                menuhtml += '</ul>'
+            }else{
+               menuhtml += '<li><a li_id="'+menuJson[item].id+'" href=\"javascript:clickMenu(\''+menuJson[item].id+'\',\''+menuJson[item].name+'\')\";>'+menuJson[item].name+'</a></li>'; 
+            }
+            
+            
+        }
+        console.log(menuhtml);
+        
+    }
+    //点击事件
+    function clickMenu(id,name){
+        $("#dLabel").html(name+'<span class="caret"></span>');
+        $("#dLabel").attr("li_id",id);
+    }
+
+    //js递归
+    function f(num){ 
+        if(num==1||num==2){ 
+            return 1; 
+        }else{ 
+            return f(num-1)+f(num-2); 
+        } 
+    }
+    //获取json对象的长度
+    function getJsonLength(jsonData){
+        var jsonLength = 0;
+        for(var item in jsonData){
+            jsonLength++;
+        }
+        return jsonLength;
+    }
+
+   
+     $(function(){
+        getValue();
+    
+
+        spliceMenu(menuJsonArray);
+        console.log("menuhtml="+menuhtml);
+        $("#test_menu").html(menuhtml);
+        var obj = $("#test_menu li a")[0];//一定要先获取到obj再调用attr,如果$("#test_menu li")[0].attr("li_id")会报错，提示没这个方法
+        $("#dLabel").attr("li_id", $(obj).attr("li_id"));
+        $("#dLabel").html($(obj).html()+'<span class="caret">');
+    })
+
+    </script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="dropdown">
+            <a id="dLabel" role="button" li_id="test" data-toggle="dropdown" class="btn btn-default" data-target="#"
+               href="javascript:;">
+                下拉多级菜单 <span class="caret"></span>
+            </a>
+            <ul id="test_menu" class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+                <li li_id=""><a href="javascript:;">一级菜单</a></li>
+                <li><a href="javascript:;">一级菜单</a></li>
+                <li class="dropdown-submenu">
+                    <a tabindex="-1" href="javascript:;">一级菜单</a>
+                    <ul class="dropdown-menu">
+                        <li><a tabindex="-1" href="javascript:;">二级菜单</a></li>
+                        <li class="dropdown-submenu">
+                            <a href="javascript:;">二级菜单</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="javascript:;">三级菜单</a></li>
+                                <li class="divider"></li>
+                                <li class="dropdown-submenu">
+                                    <a href="javascript:;">三级菜单</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="javascript:;">四级菜单</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>
